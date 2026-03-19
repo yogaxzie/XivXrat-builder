@@ -1,8 +1,9 @@
 name: XivXrat Auto Builder
+name: XivXrat Auto Builder
 
 on:
   push:
-    branches: [ "main" ] # Robot jalan setiap Tuan klik Commit/Push
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -18,14 +19,14 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2 # INI AKAN MENDOWNLOAD GRADLE OTOMATIS
 
     - name: Build APK (Release Mode)
-      run: ./gradlew assembleDebug
+      run: gradle assembleDebug # Menggunakan perintah 'gradle' langsung, bukan './gradlew'
 
-    - name: Upload APK to GitHub Release
+    - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: XivXrat-GoogleService-APK
+        name: XivXrat-APK
         path: app/build/outputs/apk/debug/app-debug.apk
