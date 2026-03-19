@@ -23,9 +23,11 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    - name: Build with Gradle
-      run: ./gradlew assembleRelease --stacktrace # Tambah stacktrace biar kalau gagal kita tahu detilnya
-
+    - name: Repair Gradle Wrapper and Build
+      run: |
+        gradle wrapper # Ini perintah buat bikin ulang file yang hilang
+        chmod +x gradlew
+        ./gradlew assembleRelease --stacktrace
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4 # Update ke v4
       with:
