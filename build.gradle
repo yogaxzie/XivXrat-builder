@@ -1,13 +1,11 @@
-// Top-level build file: Menentukan "Dapur" dan "Bumbu" Global
+// Top-level build file
 buildscript {
     repositories {
-        google()      // Mengambil library dari Google
-        mavenCentral() // Mengambil library standar Android
+        google()
+        mavenCentral()
     }
     dependencies {
-        // Versi Gradle Plugin yang stabil untuk Android
-        classpath 'com.android.tools.build:gradle:8.1.0'
-        // Plugin Kotlin agar robot paham bahasa Tuan
+        classpath "com.android.tools.build:gradle:8.0.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.10"
     }
 }
@@ -17,9 +15,4 @@ allprojects {
         google()
         mavenCentral()
     }
-}
-
-// Membersihkan sampah build lama
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }
