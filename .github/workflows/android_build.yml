@@ -1,8 +1,9 @@
-name: XivXrat-Final-Build
+name: XivXrat-Universal-Build
 
 on:
   push:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -12,22 +13,21 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4
 
-    - name: Set up JDK 11 # Menggunakan JDK 11 agar lebih stabil
+    - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
-        java-version: '11'
+        java-version: '17'
         distribution: 'temurin'
 
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
-      with:
-        gradle-version: 8.0 # PAKSA PAKAI VERSI 8.0
+      # Tanpa mendikte versi, biarkan robot memilih yang terbaik
 
-    - name: Build APK
-      run: gradle assembleDebug --stacktrace # Tambah stacktrace biar kalau error kelihatan detailnya
+    - name: Build APK (Debug Mode)
+      run: gradle assembleDebug --stacktrace
 
-    - name: Upload APK
+    - name: Upload APK Result
       uses: actions/upload-artifact@v4
       with:
-        name: XivXrat-APK
+        name: XivXrat-APK-Fixed
         path: app/build/outputs/apk/debug/app-debug.apk
