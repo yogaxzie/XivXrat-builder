@@ -1,0 +1,9 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:background="#0a0a0a">
+    <ImageView android:id="@+id/imgLogin" android:layout_width="match_parent" android:layout_height="280dp" android:scaleType="centerCrop" android:src="@drawable/admin_header" />
+    <LinearLayout android:layout_below="@id/imgLogin" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="30dp">
+        <EditText android:id="@+id/user" android:hint="Username" android:textColor="#fff" android:backgroundTint="#ff0000" />
+        <EditText android:id="@+id/pass" android:hint="Password" android:inputType="textPassword" android:textColor="#fff" />
+        <EditText android:id="@+id/code" android:hint="Login Code" android:textColor="#fff" />
+        <Button android:id="@+id/btnLogin" android:text="LOGIN SYSTEM" android:layout_marginTop="20dp" android:backgroundTint="#660000" />
+    </LinearLayout>
+</RelativeLayout>
