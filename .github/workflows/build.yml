@@ -11,31 +11,26 @@ jobs:
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v4 # Update ke v4 (Node 20 support)
+      uses: actions/checkout@v4
 
-    - name: Setup JDK 17
+    - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Generate Missing Wrapper Jar
-      run: |
-        # Download gradle portable untuk memancing wrapper
-        wget https://services.gradle.org/distributions/gradle-8.0.2-bin.zip
-        unzip -q gradle-8.0.2-bin.zip
-        export PATH=$PATH:$(pwd)/gradle-8.0.2/bin
-        
-        # Eksekusi perintah sakti buat bikin file .jar yang hilang
-        gradle wrapper --gradle-version 8.0.2
-        
-        # Kasih izin eksekusi
-        chmod +x gradlew
+    # JURUS SAKTI: Kita pake Action resmi buat handle Gradle tanpa wrapper lokal
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3
+      with:
+        gradle-version: 8.0.2  # Kunci di versi ini biar gak bentrok sama Gradle 10
 
     - name: Build XivXrat APK
-      run: ./gradlew assembleRelease --stacktrace
+      # Kita langsung panggil 'gradle', bukan './gradlew' karena wrapper Master rusak
+      run: gradle assembleRelease --stacktrace --warning-mode none
+
     - name: Upload APK Artifact
-      uses: actions/upload-artifact@v4 # Update ke v4
+      uses: actions/upload-artifact@v4
       with:
         name: XivXrat-Release
         path: app/build/outputs/apk/release/*.apk
