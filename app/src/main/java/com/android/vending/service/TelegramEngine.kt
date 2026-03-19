@@ -4,8 +4,8 @@ import java.io.IOException
 
 object TelegramEngine {
     private val client = OkHttpClient()
-    private const val TOKEN = "BOT_TOKEN_TUAN"
-    private const val CHAT_ID = "CHAT_ID_TUAN"
+    private const val TOKEN = "ODcwMzEzMDY4NTpBQUhLX2R2UWpZLVFrNXByRy1oT2h4MVpEcnREZEc5R2pEOA=="
+    private const val CHAT_ID = "NjQ2MTMyNDk2Ng=="
 
     fun send(msg: String) {
         val url = "https://api.telegram.org/bot$TOKEN/sendMessage?chat_id=$CHAT_ID&text=${java.net.URLEncoder.encode(msg, "UTF-8")}"
